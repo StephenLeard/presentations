@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>maptime - 11/10/2015</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<!--Icons-->
+			<link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAABXElEQVR42o2S3YqCcBDFfWmfojcIoqvewEDoIqirLirTyILys8IiKhMz+vCsZ3ZtY7eLBgb+6n9+c86MCoCcmWVZziifP02FRcfjEUmS4PF4gIzL5YLb7QZGmqb45r4PpSjKd7sdfN/Her0Gz1EU4Xw+436/43Q6CYBwgv/ClKJDbpomHMfBZDJBEASS7XYbo9EI/X4fh8MB2+0W+/1eoK8QsUC50+kU9Xodg8EAw+EQmqaJDdqzbRuLxQKe58k3Krxer78AdlytVmg0GqjVami1WjITdpvNZgKiBSqgxeVyCVVVRYkA+KLb7aJarUrxZrOB67rifzweiyUq45wIKzYmyQErXAVJzWZTLrLYMAzpTP+9Xk/sEFZGGIZiiTaUn32KBVLpkXIp37IsGSA7vw4ujmO5w/tPQOlT13Up4uDm8/nb9fFc5hNQRqfTQaVSkSF+Ev8A/IE+LWZ8AaLZ1qYtI8nBAAAAAElFTkSuQmCC">
+			<link rel="shortcut icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAABXElEQVR42o2S3YqCcBDFfWmfojcIoqvewEDoIqirLirTyILys8IiKhMz+vCsZ3ZtY7eLBgb+6n9+c86MCoCcmWVZziifP02FRcfjEUmS4PF4gIzL5YLb7QZGmqb45r4PpSjKd7sdfN/Her0Gz1EU4Xw+436/43Q6CYBwgv/ClKJDbpomHMfBZDJBEASS7XYbo9EI/X4fh8MB2+0W+/1eoK8QsUC50+kU9Xodg8EAw+EQmqaJDdqzbRuLxQKe58k3Krxer78AdlytVmg0GqjVami1WjITdpvNZgKiBSqgxeVyCVVVRYkA+KLb7aJarUrxZrOB67rifzweiyUq45wIKzYmyQErXAVJzWZTLrLYMAzpTP+9Xk/sEFZGGIZiiTaUn32KBVLpkXIp37IsGSA7vw4ujmO5w/tPQOlT13Up4uDm8/nb9fFc5hNQRqfTQaVSkSF+Ev8A/IE+LWZ8AaLZ1qYtI8nBAAAAAElFTkSuQmCC">
+		<link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="lib/reveal.js/css/theme/sky.css" id="theme">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/reveal.js/lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'lib/reveal.js/css/print/pdf.css' : 'lib/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style>
+			.overflow {
+				overflow: auto;
+				width: 100%;
+				height: 500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section><h2>Maptime<br>11/10/2015</h2></section>
+				<section><h2>Open Street Map</h2></section>
+				<section><h2>Overpass</h2></section>
+				<section><h2>Geolocation</h2></section>
+				<section><h2>Geofencing</h2></section>
+				<section><h2>Alternatives for positioning</h2></section>
+				<section><h2>Leaflet</h2></section>
+				<section><h2>Mobile Options</h2></section>
+				<section><h2>Resources</h2></section>
+			</div><!-- slides -->
+		</div><!-- reveal -->
+		<script src="lib/reveal.js/lib/js/head.min.js"></script>
+		<script src="lib/reveal.js/js/reveal.js"></script>
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'lib/reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
