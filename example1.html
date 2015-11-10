@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Leaflet examples</title>
+	<link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAABXElEQVR42o2S3YqCcBDFfWmfojcIoqvewEDoIqirLirTyILys8IiKhMz+vCsZ3ZtY7eLBgb+6n9+c86MCoCcmWVZziifP02FRcfjEUmS4PF4gIzL5YLb7QZGmqb45r4PpSjKd7sdfN/Her0Gz1EU4Xw+436/43Q6CYBwgv/ClKJDbpomHMfBZDJBEASS7XYbo9EI/X4fh8MB2+0W+/1eoK8QsUC50+kU9Xodg8EAw+EQmqaJDdqzbRuLxQKe58k3Krxer78AdlytVmg0GqjVami1WjITdpvNZgKiBSqgxeVyCVVVRYkA+KLb7aJarUrxZrOB67rifzweiyUq45wIKzYmyQErXAVJzWZTLrLYMAzpTP+9Xk/sEFZGGIZiiTaUn32KBVLpkXIp37IsGSA7vw4ujmO5w/tPQOlT13Up4uDm8/nb9fFc5hNQRqfTQaVSkSF+Ev8A/IE+LWZ8AaLZ1qYtI8nBAAAAAElFTkSuQmCC">
+	<link rel="shortcut icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAABXElEQVR42o2S3YqCcBDFfWmfojcIoqvewEDoIqirLirTyILys8IiKhMz+vCsZ3ZtY7eLBgb+6n9+c86MCoCcmWVZziifP02FRcfjEUmS4PF4gIzL5YLb7QZGmqb45r4PpSjKd7sdfN/Her0Gz1EU4Xw+436/43Q6CYBwgv/ClKJDbpomHMfBZDJBEASS7XYbo9EI/X4fh8MB2+0W+/1eoK8QsUC50+kU9Xodg8EAw+EQmqaJDdqzbRuLxQKe58k3Krxer78AdlytVmg0GqjVami1WjITdpvNZgKiBSqgxeVyCVVVRYkA+KLb7aJarUrxZrOB67rifzweiyUq45wIKzYmyQErXAVJzWZTLrLYMAzpTP+9Xk/sEFZGGIZiiTaUn32KBVLpkXIp37IsGSA7vw4ujmO5w/tPQOlT13Up4uDm8/nb9fFc5hNQRqfTQaVSkSF+Ev8A/IE+LWZ8AaLZ1qYtI8nBAAAAAElFTkSuQmCC">	
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+</head>
+<body>
+	<style>
+
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		html, body, #map {
+			height: 100%;
+		}
+
+	/*		
+		#map {
+			width: 1100px;
+			height: 700px;
+		}
+	*/
+	</style>
+	<div id="map"></div>
+	<script>
+		var map = L.map('map').setView([38.634988, -90.290416], 17);
+
+		var myStyle = {
+			"color": "#ff7800",
+			"weight": 8,
+			"opacity": 0.65
+		};
+
+		// map.locate({setView: true, maxZoom: 16});
+
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    	maxZoom: 18
+		}).addTo(map);
+
+		// function onLocationFound(e) {
+		//     var radius = e.accuracy / 2;
+
+		//     L.marker(e.latlng).addTo(map)
+		//         .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+		//     L.circle(e.latlng, radius).addTo(map);
+		// }
+
+		// map.on('locationfound', onLocationFound);
+
+		// var newicon = L.icon({
+		// 	iconUrl: 'logo.png'
+		// });
+
+		var circle = L.circle([38.6347641,-90.2941295], 15, {
+				color: 'green',
+				fillColor: '#f03',
+				fillOpacity: 0.25
+			}).addTo(map);
+
+		// L.marker([38.6347641,-90.2941295],{icon: newicon}).addTo(map);
+
+		circle.bindPopup("Here are the Asian Elephants!").openPopup();
+
+		function onMapClick(e){
+			console.log("You clicked the map at " + e.latlng);
+		}
+
+		map.on('click', onMapClick);
+
+		var geojsonFeature = {
+		    "type": "Feature",
+		    "properties": {
+		        "name": "Saint Louis Zoo",
+						"amenity": "zoo",
+		        "popupContent": "Here's the Zoo!"
+		    },
+		    "geometry": {
+		        "type": "Point",
+		        "coordinates": [-90.290416, 38.634988]
+		    }
+			};
+
+		var myLines = [{
+			"type": "Feature",
+			"properties": {"walkway": "north"},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [[-90.28988, 38.63539],[-90.2891, 38.63498],[-90.28837, 38.63461],[-90.28768, 38.63425]]
+			}}, {
+				"type": "Feature",
+				"properties": {"walkway": "south"},
+				"geometry": {
+					"type": "LineString",
+					"coordinates": [[-90.28946, 38.63415], [-90.28891, 38.63391], [-90.28818, 38.63359]]
+			}}];
+		L.geoJson(geojsonFeature).addTo(map);
+		L.geoJson(myLines, {style: function(feature){
+				switch(feature.properties.walkway) {
+					case 'south': return {color: "#ff0000"};
+					case 'north': return {color: "#0000ff"};
+				}
+			}
+		}).addTo(map);
+
+	</script>
+</body>
+</html>
