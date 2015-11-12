@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>"Geofencing" with Leaflet</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet' />
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  </head>
+  
+  <body>
+    <style>
+      .region {
+        position:absolute;
+        top:10px;
+        right:10px;
+        z-index:1000;
+        }
+        .region strong {
+          background:#404040;
+          color:#fff;
+          display:block;
+          padding:10px;
+          border-radius:3px;
+          }
+    </style>
+    <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-pip/v0.0.2/leaflet-pip.js'></script>
+    <!-- Check out the source example from Mapbox - 
+        https://www.mapbox.com/mapbox.js/example/v1.0.0/point-in-polygon/ -->
+    <div id='map'></div>
+    <div id='region' class='region'></div>
+    <script>
+      var region = document.getElementById('region');
+      var map = L.map('map').setView([38.63511, -90.2910], 17);
+
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      var data = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Insectarium"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -90.29197990894318,
+                    38.6352788997969
+                  ],
+                  [
+                    -90.29188066720963,
+                    38.635257948088785
+                  ],
+                  [
+                    -90.29186189174652,
+                    38.63514271358461
+                  ],
+                  [
+                    -90.29188871383666,
+                    38.6350945245552
+                  ],
+                  [
+                    -90.29202818870543,
+                    38.635071477616634
+                  ],
+                  [
+                    -90.29215157032013,
+                    38.635148999107784
+                  ],
+                  [
+                    -90.29211938381195,
+                    38.63523699637453
+                  ],
+                  [
+                    -90.29206305742264,
+                    38.63528728047844
+                  ],
+                  [
+                    -90.29197990894318,
+                    38.6352788997969
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Living World"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -90.29191017150879,
+                    38.636156770863664
+                  ],
+                  [
+                    -90.2920389175415,
+                    38.63605620384042
+                  ],
+                  [
+                    -90.29192626476288,
+                    38.63595982697741
+                  ],
+                  [
+                    -90.29152929782867,
+                    38.63622381546742
+                  ],
+                  [
+                    -90.29167413711548,
+                    38.636299240571695
+                  ],
+                  [
+                    -90.29191017150879,
+                    38.636156770863664
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Lakeside Cafe"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -90.29017746448517,
+                    38.63548213104795
+                  ],
+                  [
+                    -90.2902901172638,
+                    38.63526004325987
+                  ],
+                  [
+                    -90.29005944728851,
+                    38.635130142536575
+                  ],
+                  [
+                    -90.28991997241974,
+                    38.635352230727136
+                  ],
+                  [
+                    -90.29017746448517,
+                    38.63548213104795
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Red Rocks"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -90.28797805309296,
+                    38.633969406269586
+                  ],
+                  [
+                    -90.28810143470763,
+                    38.633810170225416
+                  ],
+                  [
+                    -90.28802096843718,
+                    38.63377245637366
+                  ],
+                  [
+                    -90.28795659542084,
+                    38.63375150422523
+                  ],
+                  [
+                    -90.28774201869965,
+                    38.63395683501581
+                  ],
+                  [
+                    -90.28788685798645,
+                    38.63401550084794
+                  ],
+                  [
+                    -90.28797805309296,
+                    38.633969406269586
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      };
+
+      function load(d) {
+          var regions = L.geoJson(d).addTo(map);
+          L.marker([38.63511, -90.2910], {draggable: true})
+          .addTo(map)
+          .bindPopup('This represents a mobile phone.<br> Move it around the highlighted regions.')
+          .openPopup()
+          .on('dragend', function(e) {
+              var layer = leafletPip.pointInLayer(this.getLatLng(), regions, true);
+              if (layer.length) {
+                region.innerHTML = '<strong>' + layer[0].feature.properties.name + '</strong>';
+              } else {
+                region.innerHTML = '<strong>Not within geofence.</strong>';
+              }
+          });
+      }
+
+      load (data);
+    </script>
+  </body>
+</html>
